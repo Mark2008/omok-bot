@@ -139,6 +139,7 @@ namespace OmokEngine {
             }
 
             stones[y][x] = Stone::BLANK;
+            turn = inverseTurn(turn);
             --turnElapsed;
             return true;
         }
