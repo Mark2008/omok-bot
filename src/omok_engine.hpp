@@ -8,12 +8,15 @@
 
 namespace OmokEngine {
     enum class Stone {
-        BLANK, BLACK, WHITE
+        BLANK = 0, 
+        BLACK = 1, 
+        WHITE = 2
     };
 
 
     enum class Turn {
-        BLACK, WHITE
+        BLACK = 1,
+        WHITE = 2
     };
     
 
@@ -41,6 +44,11 @@ namespace OmokEngine {
                     stones[i][j] = Stone::BLANK;
                 }
             }
+        }
+
+        BoardState(const BoardState& boardState) {
+            std::copy(stones, boardState.stones);
+            turn = boardState.turn;
         }
 
         std::optional<Stone> getStoneAt(int x, int y) {
@@ -131,5 +139,14 @@ namespace OmokEngine {
             stones[y][x] = Stone::BLANK;
             return true;
         }
+
+        std::array<std::array<Stone, BOARD_SIZE>, BOARD_SIZE>& getStones() {
+            return stones;
+        }
+
+        bool operator==(BoardState& other) {
+            return stones == other.stones;
+        }
+
     };
 }
