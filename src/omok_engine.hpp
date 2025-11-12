@@ -47,18 +47,18 @@ namespace OmokEngine {
         }
 
         BoardState(const BoardState& boardState) {
-            std::copy(stones, boardState.stones);
+            stones = boardState.stones;
             turn = boardState.turn;
         }
 
-        std::optional<Stone> getStoneAt(int x, int y) {
+        std::optional<Stone> getStoneAt(int x, int y) const {
             if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
                 return std::nullopt;
             }
             return stones[y][x];
         }
 
-        bool checkWinningStoneAt(int x, int y) {
+        bool checkWinningStoneAt(int x, int y) const {
             // 5개 연속인지 확인합니다
             const int dx[] = {-1,0,1,1};
             const int dy[] = {1,1,1,0};
@@ -140,11 +140,11 @@ namespace OmokEngine {
             return true;
         }
 
-        std::array<std::array<Stone, BOARD_SIZE>, BOARD_SIZE>& getStones() {
+        const std::array<std::array<Stone, BOARD_SIZE>, BOARD_SIZE>& getStones() const {
             return stones;
         }
 
-        bool operator==(BoardState& other) {
+        bool operator==(const BoardState& other) const {
             return stones == other.stones;
         }
 

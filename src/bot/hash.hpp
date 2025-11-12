@@ -28,7 +28,7 @@ namespace OmokBot {
             return distribution(gen);
         }
 
-        size_t operator()(OmokEngine::BoardState<BOARD_SIZE>& board) {
+        size_t operator()(const OmokEngine::BoardState<BOARD_SIZE>& board) const {
             size_t h = 0;
             for (int i = 0; i < BOARD_SIZE; ++i) {
                 for (int j = 0; j < BOARD_SIZE; ++j) {
