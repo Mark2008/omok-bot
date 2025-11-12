@@ -36,6 +36,7 @@ namespace OmokEngine {
     private:
         std::array<std::array<Stone, BOARD_SIZE>, BOARD_SIZE> stones;
         Turn turn;
+        int turnElapsed = 0;
 
     public:
         BoardState(Turn turn) : turn(turn) {
@@ -121,6 +122,7 @@ namespace OmokEngine {
 
             stones[y][x] = turnToStone(turn);
             turn = inverseTurn(turn);
+            ++turnElapsed;
             
             bool winning = checkWinningStoneAt(x, y);
             if (winning) 
@@ -137,6 +139,7 @@ namespace OmokEngine {
             }
 
             stones[y][x] = Stone::BLANK;
+            --turnElapsed;
             return true;
         }
 
@@ -145,6 +148,7 @@ namespace OmokEngine {
         }
 
         bool operator==(const BoardState& other) const {
+            if (turnElapsed != other.turnElapsed) return false;
             return stones == other.stones;
         }
 
