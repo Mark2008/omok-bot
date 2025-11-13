@@ -153,5 +153,8 @@ namespace OmokEngine {
             return stones == other.stones;
         }
 
+        Turn getTurn() const {
+            return turn;
+        }
     };
 }
